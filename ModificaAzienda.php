@@ -1,6 +1,9 @@
 <?php
 
 session_start();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 
 ?>
@@ -21,7 +24,7 @@ include './Nav.php';
 
 
 
-$sql="SELECT * from aziende where id='$id'";
+$sql="SELECT * from aziende where id=$id";
 $res=mysqli_query($con,$sql);
 $data=mysqli_fetch_assoc($res);
 
@@ -30,15 +33,15 @@ $data=mysqli_fetch_assoc($res);
 
    echo' 
    <div class="my-4 container w-75">
-    <form enctype="multipart/form-data" action='.$_SERVER["REQUEST_URI"].' method="POST" class="row align-items-center">
+    <form  action='.$_SERVER["REQUEST_URI"].' method="POST" class="row align-items-center">
     <div class="mb-3">
         <label   class="font2 form-label"><b>Nome Azienda</b></label>
-        <input type="text" value='.$data['Azienda'].' class="form-control" name="Azienda"  aria-describedby="NomeLibroHelp">
+        <input type="text" value='.$data['Azienda'].' class="form-control" name="Azienda"  >
 
     </div>
     <div class="mb-3">
         <label   class="font2 form-label"><b>Indirizzo</b></label>
-        <input type="text" value='.$data['indirizzo'].' class="form-control" name="indirizzo"  aria-describedby="NomeLibroHelp">
+        <input type="text" value='.$data['indirizzo'].' class="form-control" name="indirizzo"  >
 
     </div>
     
@@ -56,22 +59,22 @@ $id=$_GET['ModificaAzienda'];
 
 if($_SERVER['REQUEST_METHOD']=='POST'){
     $Azienda=mysqli_real_escape_string($con,$_POST['Azienda']);
-    $indirzzo=mysqli_real_escape_string($con,$_POST['indirizzo']);
+    $indirizzo=mysqli_real_escape_string($con,$_POST['indirizzo']);
     
-    
+    echo $Azienda." ".$indirizzo." ".$id;
  
     $sql1="UPDATE aziende SET Azienda='$Azienda',indirizzo='$indirizzo' WHERE id=$id"; 
-    $res=mysqli_query($con,$sql1);
+    $res1=mysqli_query($con,$sql1);
 
  
    
 
-    if($res){
+    if($res1){
         ?>
         <script>
         
-            window.location = "./index.php";
-            alert(' Dati Azienda modificati  correttamente');
+              window.location = "./index.php";
+              alert(' Dati Azienda modificati  correttamente');
       
         </script>
              <?php 

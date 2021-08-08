@@ -1,4 +1,17 @@
 <!--Nav Bar-->
+<?php
+
+
+session_start();
+include './connessione.php';
+$sql="SELECT ruolo.ruolo FROM utenti,ruolo WHERE utenti.KsRuolo=ruolo.id and username='pipp'";
+$res=mysqli_query($con,$sql);
+$dataFetched=mysqli_fetch_assoc($res);
+$Ruolo=$dataFetched['ruolo'];
+?>
+
+
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Navbar</a>
@@ -8,40 +21,72 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="./index.php">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="CreateTask.php">New Task</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#RegistrationModal" href="#">Registrazione azienda</a></li>
-            <li><a class="dropdown-item"  data-bs-toggle="modal" data-bs-target="#RegistrazioneUtente">Registrazione utente</a></li>
-            <li><a class="dropdown-item"  data-bs-toggle="modal" data-bs-target="#LoginModal">Login utente</a></li>
+
+
+        <!-- se sei loggato scompare il menu a tendina e compare il ruolo dell'utente registrato -->
+        <?php
+          if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) {
+            echo ' 
+            <li class="nav-item"> 
+              <a class="nav-link " href="#" id="navbarDropdown" role="button"  aria-expanded="false">
+                  Ruolo:'.$Ruolo.'
+              </a>
+            </li>';
             
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
-      </ul>
+          }else{
+            echo'
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Gestione account
+              </a>
+              
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#RegistrationModal" href="#">Registrazione azienda</a></li>
+                <li><a class="dropdown-item"  data-bs-toggle="modal" data-bs-target="#RegistrazioneUtente">Registrazione utente</a></li>
+                <li><a class="dropdown-item"  data-bs-toggle="modal" data-bs-target="#LoginModal">Login utente</a></li>
+              
+            </ul>
+          </li>
+          </ul>';
+         
+     
+        
+
+          
+        }
+
+
+          ?>
+       
 
       <?php
       if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) {
 
         echo ' 
                                    
-                                <p class="d-flex  text-align-center" href="#" id="navbarDropdown" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Welcome ' . $_SESSION['username'] . '
-                                </p> 
-                                <a class="text-dark  " data-bs-toggle="modal" 
-                                        href="./logOut.php">
-                                       <button class="btn "> Logout</button>
-                                        </a>
+                             
+
+                                    
+                       
+                                    <div class="form-inline my-2 my-lg-0">
+
+                                        <div>
+                                            Welcome ' . $_SESSION['username'] . '
+                                        </div> 
+                                         
+                                        <a class="text-dark " href="./logOut.php">
+                                              <button class="btn "> Logout</button>
+                                          </a>
+      
+                                    </div>
+                                   
+                                
             ';
       }
      ?>

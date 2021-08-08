@@ -7,7 +7,7 @@ include './connessione.php';
 $id=$_GET['IdUtente'];
 
 
-$sql="SELECT task.titolo,task.descrizione,task.datas,stato.Stato FROM task,utenti,aziende,settori,stato where task.KsUtenti=utenti.id AND task.KsStato=stato.id AND utenti.KsAziende=aziende.id And utenti.id=$id GROUP BY task.titolo";
+$sql="SELECT task.titolo,task.id,task.descrizione,task.datas,stato.Stato,utenti.username FROM task,utenti,aziende,settori,stato where task.KsUtenti=utenti.id AND task.KsStato=stato.id AND utenti.KsAziende=aziende.id And utenti.id=$id GROUP BY task.titolo";
 
 $res=mysqli_query($con,$sql);
 
@@ -25,6 +25,8 @@ while($dataFetched=mysqli_fetch_assoc($res)){
     $descrizione=$dataFetched['descrizione'];
     $Data=$dataFetched['datas'];
     $stato=$dataFetched['Stato'];
+    $idTask=$dataFetched['id'];
+    $assegnazione=$dataFetched['username'];
 
     echo'
     <div class="border-top my-4">
@@ -33,12 +35,12 @@ while($dataFetched=mysqli_fetch_assoc($res)){
         <h6 class="text-primary text-new"><span class="text-dark text-span-new font">Descrizione: </span> <b class="font">'.$descrizione.' </b></h6>
         <h6 class="text-primary text-new"><span class="text-dark text-span-new font">Data inserimento: </span> <b class="font">'.$Data.' </b></h6>
         <h6 class="text-primary text-new"><span class="text-dark text-span-new font">Stato: </span> <b class="font">'.$stato.' </b></h6>
+        <h6 class="text-primary text-new"><span class="text-dark text-span-new font">Assegnato a: </span> <b class="font">'.$assegnazione.' </b></h6>
+        
 
-        <a href="./delete.php?IdAnnuncio='. $id.'">
-            <button class="btn btn-primary my-4">Elimina</button>
-        </a>
-
-        <a href="./Modifica.php?IdAnnuncio='. $id.'">
+        
+       
+        <a href="./ModificaTask.php?ModificaTask='. $idTask.'">
             <button class="btn btn-primary my-4">Modifica</button>
         </a>
     </div>

@@ -70,7 +70,7 @@ include './connessione.php';
                             
                             <h6 class="text-primary text-new"><span class="text-dark text-span-new font">ID: </span> <b class="font">'.$id.' </b></h6>
                             <h6 class="text-primary text-new"><span class="text-dark text-span-new font">Azienda: </span> <b class="font">'.$Azienda.' </b></h6>
-                            <h6 class="text-primary text-new"><span class="text-dark text-span-new font">Indirizzo: </span> <b class="font">'.$Azienda.' </b></h6>
+                            <h6 class="text-primary text-new"><span class="text-dark text-span-new font">Indirizzo: </span> <b class="font">'.$indirizzo.' </b></h6>
                             <h6 class="text-primary text-new"><span class="text-dark text-span-new font">Settore: </span> <b class="font">'.$settore.' </b></h6>
 
                             <a href="./ViewTask.php?IdAzienda='. $id.'&&nome='. $Azienda.'">
@@ -122,12 +122,19 @@ include './connessione.php';
                             
                 <h6 class="text-primary text-new"><span class="text-dark text-span-new font">ID: </span> <b class="font">'.$id.' </b></h6>
                 <h6 class="text-primary text-new"><span class="text-dark text-span-new font">Azienda: </span> <b class="font">'.$Azienda.' </b></h6>
-                <h6 class="text-primary text-new"><span class="text-dark text-span-new font">Indirizzo: </span> <b class="font">'.$Azienda.' </b></h6>
+                <h6 class="text-primary text-new"><span class="text-dark text-span-new font">Indirizzo: </span> <b class="font">'.$indirizzo.' </b></h6>
                 <h6 class="text-primary text-new"><span class="text-dark text-span-new font">Settore: </span> <b class="font">'.$settore.' </b></h6>
 
                 <a href="./ViewTask.php?IdAzienda='. $idz.'">
                     <button class="btn btn-primary my-4">Controlla i task della azienda</button>
                 </a>
+
+                <a href="./ModificaAzienda.php?ModificaAzienda='. $id.'">
+                                <button class="btn btn-primary my-4">Modifica dati azienda</button>
+                            </a>
+                            <a href="./RimuoviAzienda.php?RemoveAzienda='. $id.'">
+                                <button class="btn btn-danger my-4">Cancella azienda</button>
+                            </a>
             </div>';
                 
                
@@ -162,10 +169,11 @@ include './connessione.php';
                             
                 <h6 class="text-primary text-new"><span class="text-dark text-span-new font">ID: </span> <b class="font">'.$id.' </b></h6>
                 <h6 class="text-primary text-new"><span class="text-dark text-span-new font">Azienda: </span> <b class="font">'.$Azienda.' </b></h6>
-                <h6 class="text-primary text-new"><span class="text-dark text-span-new font">Indirizzo: </span> <b class="font">'.$Azienda.' </b></h6>
+                <h6 class="text-primary text-new"><span class="text-dark text-span-new font">Indirizzo: </span> <b class="font">'.$indirizzo.' </b></h6>
                 <h6 class="text-primary text-new"><span class="text-dark text-span-new font">Settore: </span> <b class="font">'.$settore.' </b></h6>
 
-                <a href="./ViewTastOper.php?IdUtente='. $idUtente.'">
+                                            
+                <a href="./ViewTastOper.php?IdUtente='. $idUtente.'"> 
                     <button class="btn btn-primary my-4">Controlla i task della azienda</button>
                 </a>
             </div>';

@@ -218,4 +218,22 @@ if(isset($_GET['RegistrazioneNo']) && $_GET['RegistrazioneNO'] == true){
   
 }
 
+if(isset($_GET['TaskCancellato']) && $_GET['TaskCancellato'] == true){
+  $alert11= '<div class="alert my-0 alert-success alert-dismissible fade show font2" role="alert">
+  <strong>Messaggio:</strong>Task eliminato.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>';
+echo $alert11;
+if($alert11!=""){
+  ?>
+<script>
+setTimeout(() => {
+    window.location = "./index.php";
+}, 2000)
+</script>
+<?php
+}
+
+}
+
 ?>
